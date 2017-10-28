@@ -2,7 +2,7 @@
   <div style="width:100%">
     <v-stepper v-model="realStep">
       <v-stepper-header>
-        <v-stepper-step step="1" :complete="e1 > 2">Name of step 1</v-stepper-step>
+        <v-stepper-step step="1" :complete="e1 > 3">Name of step 1</v-stepper-step>
         <v-divider></v-divider>
         <v-stepper-step step="2" :complete="e1 > 4">Name of step 2</v-stepper-step>
         <v-divider></v-divider>
@@ -13,16 +13,22 @@
           <v-container v-show="e1 === 0">
             <v-layout row wrap>
               <v-flex xs12>
-                <v-btn flat block color="primary" @click.native="changeView2">Pedreiro</v-btn>
+                Qual é o tipo de serviço que você precisa?
               </v-flex>
               <v-flex xs12>
-                <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
+                <v-btn flat block color="primary" @click.native="changeView2">Construção</v-btn>
               </v-flex>
               <v-flex xs12>
-                <v-btn flat block color="primary" @click.native="changeView2">Continue</v-btn>
+                <v-btn flat block color="primary" @click.native="changeView2">Reformas</v-btn>
               </v-flex>
               <v-flex xs12>
-                <v-btn flat block color="primary" @click.native="changeView2">cancela</v-btn>
+                <v-btn flat block color="primary" @click.native="changeView2">Instalações</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">Troca</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">Outros</v-btn>
               </v-flex>
             </v-layout>
           </v-container>
@@ -57,46 +63,42 @@
             </v-layout>
           </v-container>
         </v-slide-x-transition>
-
         <v-btn color="primary" v-show="e1 > 0" @click.native="goBack">Voltar</v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
-        <v-container >
+        <v-container>
           <v-layout row wrap>
             <v-flex xs12>
-              <v-btn flat block color="primary" @click.native="changeView2">Pedreiro</v-btn>
+              <v-text-field
+                name="input-7-1"
+                label="Digite algum posicionamento"
+                multi-line
+              ></v-text-field>
             </v-flex>
-            <v-flex xs12>
-              <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
-            </v-flex>
-            <v-flex xs12>
-              <v-btn flat block color="primary" @click.native="changeView2">Continue</v-btn>
-            </v-flex>
-            <v-flex xs12>
-              <v-btn flat block color="primary" @click.native="changeView2">cancela</v-btn>
-            </v-flex>
+            <div v-show="isPortador" style="width:100%">
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">oddsdosk</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">aaaaa</v-btn>
+              </v-flex>
+            </div>
+            <v-flex xs6>
+              <v-checkbox label="Portador de deficiencia?" v-model="isPortador"></v-checkbox>
+           </v-flex>
+           <v-flex xs6>
+             <v-btn flat block color="primary" @click.native="changeView2">aaaaa</v-btn>
+          </v-flex>
           </v-layout>
         </v-container>
-      </v-stepper-content>
-      <v-stepper-content step="2">
-        <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
-        <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
         <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
-      <div class="pa-2">
-        <div class="color-green float-right">
-          {{ percent }}%
-        </div>
-        <v-progress-linear
-        v-bind:indeterminate="query"
-        v-bind:query="true"
-        v-model="percent"
-        v-bind:active="show"
-        ></v-progress-linear>
-      </div>
     </v-stepper>
   </div>
 </template>
@@ -106,8 +108,9 @@ export default {
   name: 'hello',
   data () {
     return {
-      realStep: 0,
+      realStep: 1,
       e1: 0,
+      isPortador: false,
       percent: 7,
       query: false,
       show: true
@@ -116,7 +119,7 @@ export default {
   methods: {
     changeView2 () {
       this.e1 = this.e1 + 1
-      if (this.e1 > 2) {
+      if (this.e1 === 3 || this.e1 === 5 ) {
         this.realStep = this.realStep + 1
       }
       this.percent = 15
@@ -134,7 +137,10 @@ h1, h2 {
   font-weight: normal;
 }
 .stepper__content{
-  height: 300px;
+  min-height: 300px;
+}
+.stepper__step--complete span{
+  background: green!important;
 }
 .color-green{
   color: green;
