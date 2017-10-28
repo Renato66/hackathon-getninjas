@@ -1,12 +1,5 @@
 <template>
   <div>
-    <div class="debug">
-      Has Navigator: {{ hasGeo }} <br>
-      Latitude: {{ lat }} <br>
-      Longitude: {{ lng }} <br>
-    </div>
-    <span v-if="hasGeo">Seu endereço atual é: {{ address }}</span>
-    <span v-if="!hasGeo">Pedir CEP</span>
   </div>
 </template>
 
@@ -46,7 +39,8 @@ export default {
           { location: { lat, lng } },
           (results, status) => {
             if (status === 'OK' && results[0]) {
-              vm.address = results[0].formatted_address;
+              vm.$emit('input', results[0].formatted_address)
+              vm.address = results[0].formatted_address
             }
           }
         );
