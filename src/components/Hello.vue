@@ -1,5 +1,6 @@
 <template>
   <div style="width:100%">
+    <get-address></get-address>
     <v-stepper v-model="realStep">
       <v-stepper-header>
         <v-stepper-step step="1" :complete="e1 > 3">Name of step 1</v-stepper-step>
@@ -127,6 +128,9 @@ export default {
     goBack () {
       this.e1 = this.e1 - 1
     }
+  },
+  components: {
+    'get-address': require('./GetAddress.vue')
   }
 }
 </script>
