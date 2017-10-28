@@ -1,21 +1,55 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2 @click="addClass">Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div style="width:100%">
+    <v-stepper v-model="e1">
+      <v-stepper-header>
+        <v-stepper-step step="1" :complete="e1 > 1">Name of step 1</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="2" :complete="e1 > 2">Name of step 2</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="3">Name of step 3</v-stepper-step>
+      </v-stepper-header>
+      <v-stepper-content step="1">
+        <v-container>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <v-btn color="primary" @click.native="changeView2">Pedreiro</v-btn>
+            </v-flex>
+            <v-flex xs12>
+              <v-btn color="primary" @click.native="changeView2">algo</v-btn>
+            </v-flex>
+            <v-flex xs12>
+              <v-btn color="primary" @click.native="changeView2">Continue</v-btn>
+            </v-flex>
+            <v-flex xs12>
+              <v-btn color="primary" @click.native="changeView2">cancela</v-btn>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-btn color="primary" @click.native="changeView2">Continue</v-btn>
+        <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
+        <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
+        <v-btn flat>Cancel</v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="2">
+        <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
+        <v-btn flat>Cancel</v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="3">
+        <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
+        <v-btn flat>Cancel</v-btn>
+      </v-stepper-content>
+      <div class="pa-2">
+        <div class="color-green float-right">
+          {{ percent }}%
+        </div>
+        <v-progress-linear
+        v-bind:indeterminate="query"
+        v-bind:query="true"
+        v-model="percent"
+        v-bind:active="show"
+        ></v-progress-linear>
+      </div>
+    </v-stepper>
   </div>
 </template>
 
@@ -24,12 +58,16 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js PWA'
+      e1: 0,
+      percent: 7,
+      query: false,
+      show: true
     }
   },
   methods: {
-    addClass () {
-      this.mgs = "oi"
+    changeView2 () {
+      this.e1 = 2
+      this.percent = 15
     }
   }
 }
@@ -40,7 +78,15 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-
+.stepper__content{
+  height: 300px;
+}
+.color-green{
+  color: green;
+}
+.float-right{
+  float: right;
+}
 ul {
   list-style-type: none;
   padding: 0;
