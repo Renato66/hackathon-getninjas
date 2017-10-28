@@ -127,7 +127,7 @@
           <v-container class="box-step">
             <v-layout row wrap>
               <v-flex xs12 class="titulo">
-                Para quando você precisa deste serviço?
+                Alguma informação adicional?
               </v-flex>
               <v-flex xs12>
                 <v-text-field
@@ -135,6 +135,26 @@
                   label="Descreva o que você precisa"
                   multi-line
                 ></v-text-field>
+              </v-flex>
+             <v-flex xs6>
+               <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
+            </v-flex>
+
+            </v-layout>
+          </v-container>
+          <v-btn color="primary" v-show="e1 > 0" @click.native="goBack">Voltar</v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="7">
+          <v-container>
+            <v-layout row wrap>
+              <v-flex xs12 class="titulo">
+                Possiu alguma deficiência?
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox label="Sim" v-model="isPortador"></v-checkbox>
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox label="Não" :value="false" @click.native="changeView2"></v-checkbox>
               </v-flex>
               <div v-show="isPortador" style="width:100%">
                 <v-flex xs12>
@@ -150,42 +170,6 @@
                   <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="selectItem">Intelectual</v-btn>
                 </v-flex>
               </div>
-             <v-flex xs6>
-               <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
-            </v-flex>
-            <v-flex xs12>
-              <v-checkbox label="Portador de deficiencia?" v-model="isPortador"></v-checkbox>
-            </v-flex>
-            </v-layout>
-          </v-container>
-          <v-btn color="primary" v-show="e1 > 0" @click.native="goBack">Voltar</v-btn>
-      </v-stepper-content>
-      <v-stepper-content step="7">
-          <v-container>
-            <v-layout row wrap>
-              <v-flex xs12>
-                <p>
-                  Encontramos
-                </p>
-                <div class="destaque-quantidade">
-                  72
-                </div>
-                <p>
-                  profissionais na região de
-                </p>
-                <p>
-                  <strong>{{ geolocation }}</strong>
-                </p>
-               </v-flex>
-               <v-flex xs12 class="">
-                 realizar o serviço em outro lugar?
-                </v-flex>
-                <v-flex xs12 class="">
-                  proximo
-                 </v-flex>
-             <v-flex offset-xs6 xs6>
-               <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
-            </v-flex>
             </v-layout>
           </v-container>
         </v-stepper-content>
@@ -195,7 +179,19 @@
             <v-flex xs12>
               <img src="https://www.getninjas.com.br/assets/request/phone_call.svg" alt="">
              </v-flex>
-             <v-flex xs12 class="">
+             <v-flex xs12 v-if="geolocation !== ''" class="">
+               Localizamos sua area aproximada
+               {{ geolocation }}
+             </v-flex>
+             <v-flex xs12 v-else class="">
+               <v-text-field
+               name="input-1"
+               label="Label Text"
+               id="testing"
+               mask="#####-###"
+               ></v-text-field>
+             </v-flex>
+            <v-flex xs12 class="link" @click.native="geolocation = ''">
                realizar o serviço em outro lugar?
              </v-flex>
              <v-flex xs12 class="">
@@ -208,6 +204,78 @@
         </v-container>
       </v-stepper-content>
       <v-stepper-content step="9">
+      <v-container>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <img src="https://www.getninjas.com.br/assets/request/phone_call.svg" alt="">
+           </v-flex>
+           <v-flex xs12 class="">
+             <v-text-field
+             name="input-1"
+             label="Telefone"
+             id="testing"
+             mask="(##) #####-####"
+             ></v-text-field>
+           </v-flex>
+           <v-flex xs12 class="">
+            Não perca tempo ligando para vários profissionais. Preencha os dados abaixo e nós encontraremos os melhores pra você!
+           </v-flex>
+           <v-flex offset-xs6 xs6>
+             <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-stepper-content>
+    <v-stepper-content step="10">
+    <v-container>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <img src="https://www.getninjas.com.br/assets/request/phone_call.svg" alt="">
+         </v-flex>
+         <v-flex xs12 class="">
+           <v-text-field
+           name="input-1"
+           label="Telefone"
+           id="testing"
+           mask="(##) #####-####"
+           ></v-text-field>
+         </v-flex>
+         <v-flex xs12 class="">
+          Não perca tempo ligando para vários profissionais. Preencha os dados abaixo e nós encontraremos os melhores pra você!
+         </v-flex>
+         <v-flex offset-xs6 xs6>
+           <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-stepper-content>
+  <v-stepper-content step="10">
+  <v-container>
+    <v-layout row wrap>
+      <v-flex xs12>
+        <img src="https://www.getninjas.com.br/assets/request/phone_call.svg" alt="">
+       </v-flex>
+       <v-flex xs12 class="">
+           <v-progress-circular
+           v-bind:size="100"
+           v-bind:width="15"
+           v-bind:rotate="-90"
+           v-bind:value="value"
+           color="primary"
+         >
+           {{ value }}
+         </v-progress-circular>
+       </v-flex>
+       <v-flex xs12 class="">
+        Não perca tempo ligando para vários profissionais. Preencha os dados abaixo e nós encontraremos os melhores pra você!
+       </v-flex>
+       <v-flex offset-xs6 xs6>
+         <v-btn block class="elevation-1 text-xs-left back-btn" @click.native="changeView2">Prosseguir</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</v-stepper-content>
+      <v-stepper-content step="10">
         <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
@@ -286,6 +354,9 @@ h1, h2 {
 }
 .not-active .stepper__step__step{
   background-color: rgba(0,0,0,0.38)!important
+}
+.back-btn{
+  text-transform: capitalize!important;
 }
 ul {
   list-style-type: none;
