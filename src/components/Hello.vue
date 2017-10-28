@@ -1,34 +1,82 @@
 <template>
   <div style="width:100%">
-    <v-stepper v-model="e1">
+    <v-stepper v-model="realStep">
       <v-stepper-header>
-        <v-stepper-step step="1" :complete="e1 > 1">Name of step 1</v-stepper-step>
+        <v-stepper-step step="1" :complete="e1 > 2">Name of step 1</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step step="2" :complete="e1 > 2">Name of step 2</v-stepper-step>
+        <v-stepper-step step="2" :complete="e1 > 4">Name of step 2</v-stepper-step>
         <v-divider></v-divider>
         <v-stepper-step step="3">Name of step 3</v-stepper-step>
       </v-stepper-header>
       <v-stepper-content step="1">
-        <v-container>
+        <v-slide-x-transition mode="out-in">
+          <v-container v-show="e1 === 0">
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">Pedreiro</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">Continue</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">cancela</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-slide-x-transition>
+        <v-slide-x-transition mode="in-out">
+          <v-container v-show="e1 === 1">
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">cidade</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">aaaaa</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-slide-x-transition>
+        <v-slide-x-transition mode="in-out">
+          <v-container v-show="e1 === 2">
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">oddsdosk</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-btn flat block color="primary" @click.native="changeView2">aaaaa</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-slide-x-transition>
+
+        <v-btn color="primary" v-show="e1 > 0" @click.native="goBack">Voltar</v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="2">
+        <v-container >
           <v-layout row wrap>
             <v-flex xs12>
-              <v-btn color="primary" @click.native="changeView2">Pedreiro</v-btn>
+              <v-btn flat block color="primary" @click.native="changeView2">Pedreiro</v-btn>
             </v-flex>
             <v-flex xs12>
-              <v-btn color="primary" @click.native="changeView2">algo</v-btn>
+              <v-btn flat block color="primary" @click.native="changeView2">algo</v-btn>
             </v-flex>
             <v-flex xs12>
-              <v-btn color="primary" @click.native="changeView2">Continue</v-btn>
+              <v-btn flat block color="primary" @click.native="changeView2">Continue</v-btn>
             </v-flex>
             <v-flex xs12>
-              <v-btn color="primary" @click.native="changeView2">cancela</v-btn>
+              <v-btn flat block color="primary" @click.native="changeView2">cancela</v-btn>
             </v-flex>
           </v-layout>
         </v-container>
-        <v-btn color="primary" @click.native="changeView2">Continue</v-btn>
-        <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
-        <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
-        <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
         <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
@@ -58,6 +106,7 @@ export default {
   name: 'hello',
   data () {
     return {
+      realStep: 0,
       e1: 0,
       percent: 7,
       query: false,
@@ -66,8 +115,14 @@ export default {
   },
   methods: {
     changeView2 () {
-      this.e1 = 2
+      this.e1 = this.e1 + 1
+      if (this.e1 > 2) {
+        this.realStep = this.realStep + 1
+      }
       this.percent = 15
+    },
+    goBack () {
+      this.e1 = this.e1 - 1
     }
   }
 }
