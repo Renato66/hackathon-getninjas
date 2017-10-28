@@ -9,7 +9,7 @@
                   back
                 </v-flex>
                 <v-flex xs8 class="text-xs-center">
-                  Precisando de Pedreitos?
+                  Precisando de Pedreiros?
                 </v-flex>
                 <v-flex xs2>
                   question
@@ -20,11 +20,11 @@
           <v-layout row wrap>
             <v-flex xs10 offset-xs1 mt-3 mb-3>
               Milhares de profissionais avalidados por clientes,
-              permitindo você negocias apesnas com os melhores.
+              permitindo você negociar apenas com os melhores.
             </v-flex>
-            <v-flex xs10 offset-xs1 class="text-xs-center">
-              <img src="https://www.getninjas.com.br/assets/categories/stamp-safe-9227a11c823097593417e5aebfd1813a9ec574fb600c05a58078b6a65c7c6ff6.svg" class="gratis" height="30" width="30" alt="Segurança">
-              <span class="pl-2" style="font-size:20px; margin-top:-10px;">Grátis e Seguro</span>
+            <v-flex xs10 offset-xs1 class="text-xs-left">
+              <img src="https://www.getninjas.com.br/assets/categories/stamp-safe-9227a11c823097593417e5aebfd1813a9ec574fb600c05a58078b6a65c7c6ff6.svg" class="gratis" height="30" width="30" alt="Selo de segurança">
+              <span class="pl-2" style="font-size:16px; margin-top:-10px;font-style: italic;font-color: #828282;">Grátis e Seguro</span>
             </v-flex>
           </v-layout>
           <v-layout row wrap>
